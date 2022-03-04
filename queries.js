@@ -8,6 +8,7 @@ const pool = new Pool({
 })
 
 const getTodos = (request, response) => {
+  console.log("get all Todos from database")
   pool.query('SELECT * FROM todos ORDER BY id ASC', (error, results) => {
     if (error) {
       throw error
@@ -17,6 +18,7 @@ const getTodos = (request, response) => {
 }
 
 const getTodoById = (request, response) => {
+  console.log("get Todo by Id from database")
   const id = parseInt(request.params.id)
 
   pool.query('SELECT * FROM todos WHERE id = $1', [id], (error, results) => {
@@ -28,6 +30,7 @@ const getTodoById = (request, response) => {
 }
 
 const createTodo = (request, response) => {
+  console.log("Create Todo in database")
   const { task } = request.body
 
   pool.query('INSERT INTO todos (task, complete) VALUES ($1, $2) RETURNING id', [task, false], (error, results) => {
@@ -39,6 +42,7 @@ const createTodo = (request, response) => {
 }
 
 const updateTodo = (request, response) => {
+  console.log("Update Todo in database")
   const id = parseInt(request.params.id)
   const { complete } = request.body
 
@@ -55,6 +59,7 @@ const updateTodo = (request, response) => {
 }
 
 const deleteTodo = (request, response) => {
+  console.log("delete Todo in database")
   const id = parseInt(request.params.id)
 
   pool.query('DELETE FROM todos WHERE id = $1', [id], (error, results) => {

@@ -12,6 +12,7 @@ app.use(
 )
 
 app.get('/healthz', (request, response) => {
+  console.log("Received request at: /healthz")
   const healthz = {
 		uptime: process.uptime(),
 		version: process.env.npm_package_version,
