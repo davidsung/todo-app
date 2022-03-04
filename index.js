@@ -14,7 +14,7 @@ app.use(
 app.get('/healthz', (request, response) => {
   const healthz = {
 		uptime: process.uptime(),
-		message: 'OK',
+		version: process.env.npm_package_version,
 		timestamp: Date.now()
 	};
   response.json(healthz)
